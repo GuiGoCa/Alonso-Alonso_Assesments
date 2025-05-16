@@ -22,10 +22,10 @@ function addTask() {
 
 async function viewAllTask(){
   if(tasksAdded.length === 0){
-    console.log('No hay tareas en la lista');
+    console.log('There are no existing tasks in the List');
   }
   else{
-    console.log('Lista de tareas: ');
+    console.log('List of task: ');
     tasksAdded.forEach((task, index) => {
       const status = task.completed ? '[Completed]' :'[Pending]';
       console.log(`${index + 1}. ${task.description} ${status}`);
@@ -36,20 +36,20 @@ async function viewAllTask(){
 function markTaskAsComplete() {
   return new Promise((resolve) => {
     readline.question(
-      'Por favor, introduce el número de la tarea que deseas marcar como completa: ',(taskNumber) => {
+      'Please enter the num of the task you want to mark as completed: ',(taskNumber) => {
         const index = parseInt(taskNumber) - 1; 
 
         if (index >= 0 && index < tasksAdded.length) {
           if (!tasksAdded[index].completed) {
             tasksAdded[index].completed = true;
-            console.log(`Tarea "${tasksAdded[index].description}" marcada como completa.`);
+            console.log(`Task "${tasksAdded[index].description}" is marked as completed.`);
           } 
           else {
-            console.log(`La tarea "${tasksAdded[index].description}" ya estaba completada.`);
+            console.log(`Task "${tasksAdded[index].description}" was already completed.`);
           }
         } 
         else {
-          console.log('Error: Esa tarea no existe.');
+          console.log('Error: This task does not exist!');
         }
         resolve();
       }
@@ -60,17 +60,17 @@ function markTaskAsComplete() {
 function deleteTask() {
     return new Promise(resolve => {
         readline.question(
-            'Por favor, introduce el número de la tarea que deseas eliminar: ',
+            'Please enter the number of the task you want to delete: ',
             (taskNumber) => {
                 const index = parseInt(taskNumber) - 1;
 
                 if (index >= 0 && index < tasksAdded.length) {
                     const deletedTask = tasksAdded.splice(index, 1)[0]; 
-                    console.log(`Tarea "${deletedTask.description}" eliminada.`);
-                    console.log("Lista de tareas actual:", tasksAdded);
+                    console.log(`Task "${deletedTask.description}" deleted.`);
+                    console.log("List of task updated: ", tasksAdded);
 
                 } else {
-                    console.log('Error: Esa tarea no existe.');
+                    console.log('Error: This task does not exist');
                 }
                 resolve();
             }
